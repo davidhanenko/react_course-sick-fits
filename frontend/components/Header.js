@@ -1,18 +1,49 @@
 import Link from 'next/link';
+import styled from 'styled-components';
 import Nav from './Nav';
+
+const Logo = styled.h1`
+  font-size: 4rem;
+  background: red;
+  position: relative;
+  margin-left: 2rem;
+  z-index: 2;
+  transform: skew(-7deg);
+  a {
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+  }
+`;
+
+const HeaderStyles = styled.header`
+  .bar {
+    border-bottom: 10px solid var(--black, black);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sub-bar {
+    border-bottom: 1px solid var(--black, black);
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+`
 
 export default function Header() {
   return (
-    <header>
-      <div className='bar'>
-        <Link href='/'>
-          <h1>Sick fits</h1>
-        </Link>
+    <HeaderStyles>
+      <div className="bar">
+        <Logo>
+          <Link href="/">Sick fits</Link>
+        </Logo>
       </div>
-      <div className='sub-bar'>
+      <div className="sub-bar">
         <p>Search</p>
       </div>
       <Nav />
-    </header>
-  )
+    </HeaderStyles>
+  );
 }
