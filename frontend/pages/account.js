@@ -3,5 +3,5 @@ export default function AccountPage() {
     <div>
       <p>Account</p>
     </div>
-  )
+  );
 }
