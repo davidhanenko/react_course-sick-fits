@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: radnika_next;
     src: url('/static/radnikanext-medium-webfont.woff2') format('woff2');
+    font-size: 62.5%;
     font-weight: normal;
     font-style: normal;
   }
