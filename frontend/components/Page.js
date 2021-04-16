@@ -6,7 +6,6 @@ const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: radnika_next;
     src: url('/static/radnikanext-medium-webfont.woff2') format('woff2');
-    font-size: 62.5%;
     font-weight: normal;
     font-style: normal;
   }
@@ -16,11 +15,12 @@ const GlobalStyles = createGlobalStyle`
     --grey: #3A3A3A;
     --gray: var(--grey);
     --lightGrey: #e1e1e1;
-    --lightGray: var(---lightGrey);
+    --lightGray: var(--lightGrey);
     --offWhite: #ededed;
     --maxWidth: 1000px;
     --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
     box-sizing: border-box;
+    font-size: 62.5%;
   }
   *, *:before, *:after{
     box-sizing: inherit;
