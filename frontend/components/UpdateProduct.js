@@ -66,11 +66,12 @@ export default function UpdateProduct({ id }) {
         const res = await updateProduct({
           variables: {
             id,
-            name: inputs.nane,
+            name: inputs.name,
             description: inputs.description,
             price: inputs.price,
           },
         }).catch(console.error);
+
         // // Submit the inputfields to the backend
         // const res = await createProduct();
         // clearForm();
@@ -90,7 +91,7 @@ export default function UpdateProduct({ id }) {
             name="name"
             id="name"
             placeholder="Name"
-            value={inputs.name}
+            value={inputs.name || ''}
             onChange={handleChange}
           />
         </label>
@@ -102,7 +103,7 @@ export default function UpdateProduct({ id }) {
             name="price"
             id="price"
             placeholder="Price"
-            value={inputs.price}
+            value={inputs.price || ''}
             onChange={handleChange}
           />
         </label>
@@ -113,7 +114,7 @@ export default function UpdateProduct({ id }) {
             name="description"
             id="description"
             placeholder="Description"
-            value={inputs.description}
+            value={inputs.description || ''}
             onChange={handleChange}
           />
         </label>
