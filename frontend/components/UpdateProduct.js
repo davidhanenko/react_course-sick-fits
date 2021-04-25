@@ -56,6 +56,8 @@ export default function UpdateProduct({ id }) {
 
   // State for form inputs
   const { inputs, handleChange, resetForm, clearForm } = useForm(data?.Product);
+
+  // loading
   if (loading) return <p>Loading...</p>;
 
   // form to handle update
@@ -71,14 +73,6 @@ export default function UpdateProduct({ id }) {
             price: inputs.price,
           },
         }).catch(console.error);
-
-        // // Submit the inputfields to the backend
-        // const res = await createProduct();
-        // clearForm();
-        // // Go to the Products page
-        // Router.push({
-        //   pathname: `/product/${res.data.createProduct.id}`,
-        // });
       }}
     >
       <DisplayError error={error || updateError} />

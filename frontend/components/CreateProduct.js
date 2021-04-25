@@ -54,7 +54,7 @@ export default function CreateProduct() {
         // Submit the inputfields to the backend
         const res = await createProduct();
         clearForm();
-        // Go to the Products page
+        // Go to the Products page & refresh page to see changes
         Router.push({
           pathname: `/product/${res.data.createProduct.id}`,
         });

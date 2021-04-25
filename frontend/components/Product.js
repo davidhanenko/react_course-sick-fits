@@ -4,6 +4,7 @@ import formatMoney from '../lib/formatMoney';
 import ItemStyles from './styles/ItemStyles';
 import PriceTag from './styles/PriceTag';
 import Title from './styles/Title';
+import DeleteProduct from './DeleteProduct';
 
 export default function Product({ product }) {
   return (
@@ -18,7 +19,7 @@ export default function Product({ product }) {
       <PriceTag>{formatMoney(product?.price)}</PriceTag>
       <p>{product.description}</p>
 
-      <div className='buttonList'>
+      <div className="buttonList">
         <Link
           href={{
             pathname: '/update',
@@ -29,6 +30,7 @@ export default function Product({ product }) {
         >
           Edit ✏️
         </Link>
+        <DeleteProduct id={product.id}>Delete 🗑️</DeleteProduct>
       </div>
     </ItemStyles>
   );
