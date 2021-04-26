@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from './products/i';","map":{"version":3,"sources":["/Volumes/Files/Learning/React/Advanced-React-master/sick-fits/frontend/pages/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,cAAxB","sourcesContent":["export { default } from './products/i';\n"]},"metadata":{},"sourceType":"module"}
