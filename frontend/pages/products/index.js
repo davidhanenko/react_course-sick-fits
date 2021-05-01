@@ -3,6 +3,7 @@ import Pagination from '../../components/Pagination';
 import Products from '../../components/Products';
 
 export default function ProductPage() {
+  // query come from useRouter hoor, and contain query with number of page(because [page].js file (name of file is the parameter))
   const { query } = useRouter();
   const page = parseInt(query.page);
   return (
