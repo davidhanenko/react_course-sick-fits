@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import { Router } from 'next/router';
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
 import { CURRENT_USER_QUERY } from './User';
@@ -30,33 +31,31 @@ export default function SignIn() {
     password: '',
   });
 
-  const [signin, { data, error, loading }] = useMutation(SIGNIN_MUTATION, {
+  const [signin, { data, loading }] = useMutation(SIGNIN_MUTATION, {
     variables: inputs,
     // refetch the currently logged user
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
 
-  console.log(error);
-
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await signin();
+    await signin();
     resetForm();
-    console.log(res);
     // Send the email and passwort to the graphQL API
   }
+
+  const error =
+    data?.authenticateUserWithPassword.__typename ===
+    'UserAuthenticationWithPasswordFailure'
+      ? data?.authenticateUserWithPassword
+      : undefined;
 
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       {/* method "POST" will not let password go to url/must have!!! */}
       <h2>Sign Into Your Account</h2>
 
-      <Error
-        error={
-          data?.authenticateUserWithPassword
-            ?.UserAuthenticationWithPasswordFailure
-        }
-      />
+      <Error error={error} />
 
       <fieldset>
         <label htmlFor="email">
