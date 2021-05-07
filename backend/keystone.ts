@@ -28,6 +28,9 @@ const { withAuth } = createAuth({
     fields: ['name', 'email', 'password'],
     // todo: Add in roles here
   },
+
+  
+
 });
 
 export default withAuth(

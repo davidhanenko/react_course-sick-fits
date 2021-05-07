@@ -31,27 +31,26 @@ export default function SignUp() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await signup().catch(console.log(error));
+    await signup().catch(console.error);
     resetForm();
-    console.log({ data, loading, error });
     // Send the email and passwort to the graphQL API
   }
-
-  // const error =
-  //   data?.authenticateUserWithPassword.__typename ===
-  //   'UserAuthenticationWithPasswordFailure'
-  //     ? data?.authenticateUserWithPassword
-  //     : undefined;
 
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       {/* method "POST" will not let password go to url/must have!!! */}
-      <h2>Sign Up Your Account</h2>
+      <h2>Sign Up For an Account</h2>
 
       <Error error={error} />
 
       <fieldset>
+        {data?.createUser && (
+          <p>
+            Signed up with {data.createUser.email} - Please Go Head and Sign In
+          </p>
+        )}
         <label htmlFor="name">
+          Your Name
           <input
             type="text"
             name="name"
@@ -62,6 +61,7 @@ export default function SignUp() {
           />
         </label>
         <label htmlFor="email">
+          Email
           <input
             type="email"
             name="email"
@@ -72,6 +72,7 @@ export default function SignUp() {
           />
         </label>
         <label htmlFor="password">
+          Password
           <input
             type="password"
             name="password"

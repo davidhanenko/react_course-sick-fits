@@ -58,6 +58,7 @@ export default function SignIn() {
 
       <fieldset>
         <label htmlFor="email">
+          Email
           <input
             type="email"
             name="email"
@@ -68,6 +69,7 @@ export default function SignIn() {
           />
         </label>
         <label htmlFor="password">
+          Password
           <input
             type="password"
             name="password"
