@@ -39,47 +39,47 @@ export default function Reset({ token }) {
   async function handleSubmit(e) {
     e.preventDefault();
     await reset().catch(console.error);
-
+    console.log(reset, successfulError);
     resetForm();
     // Send the email and passwort to the graphQL API
   }
 
   return (
-    <Form method="POST" onSubmit={handleSubmit}>
+    <Form method='POST' onSubmit={handleSubmit}>
       {/* method "POST" will not let password go to url/must have!!! */}
       <h2>Reset Your Password</h2>
 
       <Error error={error || successfulError} />
 
-      <fieldset>
+      <fieldset aria-busy={loading}>
         {data?.redeemUserPasswordResetToken === null && (
           <p>Success! You can Now Sign In</p>
         )}
 
-        <label htmlFor="email">
+        <label htmlFor='email'>
           Email
           <input
-            type="email"
-            name="email"
-            placeholder="Your Email Address"
-            autoComplete="email"
+            type='email'
+            name='email'
+            placeholder='Your Email Address'
+            autoComplete='email'
             value={inputs.email}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor='password'>
           Password
           <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            autoComplete="password"
+            type='password'
+            name='password'
+            placeholder='Password'
+            autoComplete='password'
             value={inputs.password}
             onChange={handleChange}
           />
         </label>
 
-        <button type="submit">Request Reset</button>
+        <button type='submit'>Request Reset</button>
       </fieldset>
     </Form>
   );

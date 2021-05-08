@@ -1,6 +1,7 @@
 import RequestReset from '../components/RequestReset';
 import Reset from '../components/Reset';
 
+// we get query from props on page level === props.query
 export default function ResetPage({ query }) {
   if (!query?.token) {
     return (

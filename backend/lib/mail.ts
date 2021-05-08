@@ -25,6 +25,10 @@ function makeNiceEmail(text: string): string {
   `;
 }
 
+export interface Envelope {
+  from: string;
+  to?: string[] | null;
+}
 export interface MailResponse {
   accepted?: string[] | null;
   rejected?: null[] | null;
@@ -34,10 +38,6 @@ export interface MailResponse {
   response: string;
   envelope: Envelope;
   messageId: string;
-}
-export interface Envelope {
-  from: string;
-  to?: string[] | null;
 }
 
 export async function sendPasswordResetEmail(
