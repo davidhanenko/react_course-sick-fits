@@ -42,7 +42,7 @@ export default function Products({ page }) {
   return (
     <div>
       <ProductListStyles>
-        {data.allProducts.map((p) => (
+        {data?.allProducts.map((p) => (
           <Product key={p.id} product={p} />
         ))}
       </ProductListStyles>
