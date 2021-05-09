@@ -33,7 +33,7 @@ export default function RequestReset() {
   }
 
   return (
-    <Form method='POST' onSubmit={handleSubmit}>
+    <Form method="POST" onSubmit={handleSubmit}>
       {/* method "POST" will not let password go to url/must have!!! */}
       <h2>Request a Password Reset</h2>
 
@@ -44,19 +44,19 @@ export default function RequestReset() {
           <p>Success! Check your email for a link</p>
         )}
 
-        <label htmlFor='email'>
+        <label htmlFor="email">
           Email
           <input
-            type='email'
-            name='email'
-            placeholder='Your Email Address'
-            autoComplete='email'
+            type="email"
+            name="email"
+            placeholder="Your Email Address"
+            autoComplete="email"
             value={inputs.email}
             onChange={handleChange}
           />
         </label>
 
-        <button type='submit'>Request Reset</button>
+        <button type="submit">Request Reset</button>
       </fieldset>
     </Form>
   );
