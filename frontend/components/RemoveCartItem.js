@@ -30,6 +30,12 @@ export default function RemoveCartItem({ id }) {
       id,
     },
     update,
+    // optimisticResponse: {
+    //   deleteCartItem: {
+    //     __typename: 'CartItem',
+    //     id,
+    //   },
+    // },
   });
 
   return (
