@@ -7,6 +7,7 @@ import Supreme from './styles/Supreme';
 import { useUser } from './User';
 import { useCart } from '../lib/CartState';
 import CloseButton from './styles/CloseButton';
+import RemoveCartItem from './RemoveCartItem';
 
 const CartItemsStyles = styled.li`
   padding: 1rem 0;
@@ -43,6 +44,7 @@ function CartItem({ cartItem }) {
           </em>
         </p>
       </div>
+      <RemoveCartItem id={cartItem.id} />
     </CartItemsStyles>
   );
 }
