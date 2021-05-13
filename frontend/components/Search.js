@@ -1,5 +1,24 @@
 import { resetIdCounter, useCombobox } from 'downshift';
+import gql from 'graphql-tag';
 import { DropDown, DropDownItem, SearchStyles } from './styles/DropDown';
+
+const SEARCH_PRODUCTS_QUERY = gql`
+  query SEARCH_PRODUCTS_QUERY(&searchTerm: String!) {
+    searchTerms: allProducts(
+      where: {
+        
+      }
+    ) { # rename Keystone query to our own
+    id
+    name
+    photo {
+      image {
+        publicUrlTransformed
+      }
+    }
+    }
+  }
+`;
 
 export default function Search() {
   resetIdCounter(); // method from Downshift to handle SSR issues, like: ***Prop `aria-controls` did not match. Server: "downshift-5-menu" Client: "downshift-1-menu"***
@@ -20,7 +39,7 @@ export default function Search() {
         <input
           {...getInputProps({
             type: 'search',
-            placeholder: 'Search for a Item',
+            placeholder: 'Search for an Item',
             id: 'search',
             className: 'loading',
           })}
