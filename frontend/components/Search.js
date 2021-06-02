@@ -3,6 +3,7 @@ import { useLazyQuery } from '@apollo/client';
 import { resetIdCounter, useCombobox } from 'downshift';
 import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
+import { useRouter } from 'next/dist/client/router';
 import { DropDown, DropDownItem, SearchStyles } from './styles/DropDown';
 
 const SEARCH_PRODUCTS_QUERY = gql`
@@ -28,6 +29,8 @@ const SEARCH_PRODUCTS_QUERY = gql`
 `;
 
 export default function Search() {
+  const router = useRouter();
+
   const [findItems, { loading, data, error }] = useLazyQuery(
     SEARCH_PRODUCTS_QUERY,
     {
@@ -42,15 +45,16 @@ export default function Search() {
   resetIdCounter(); // method from Downshift to handle SSR issues, like: ***Prop `aria-controls` did not match. Server: "downshift-5-menu" Client: "downshift-1-menu"***
 
   const {
+    isOpen,
     inputValue,
     getMenuProps,
     getInputProps,
     getComboboxProps,
     getItemProps,
+    highlightedIndex,
   } = useCombobox({
-    items: [],
+    items,
     onInputValueChange() {
-      console.log('Input changed');
       findItemsButChill({
         variables: {
           searchTerm: inputValue,
@@ -58,9 +62,12 @@ export default function Search() {
       });
     },
 
-    onSelectedItemChange() {
-      console.log('Selected Item change');
+    onSelectedItemChange({ selectedItem }) {
+      router.push({
+        pathname: `/product/${selectedItem.id}`,
+      });
     },
+    itemToString: (item) => item?.name || '',
   });
 
   return (
@@ -76,16 +83,25 @@ export default function Search() {
         />
       </div>
       <DropDown {...getMenuProps()}>
-        {items.map((item) => (
-          <DropDownItem key={item.id} { ...getItemProps({ item })}>
-            <img
-              src={item.photo.image.publicUrlTransformed}
-              alt={item.name}
-              width="50"
-            />
-            {item.name}
-          </DropDownItem>
-        ))}
+        {isOpen &&
+          items.map((item, index) => (
+            <DropDownItem
+              key={item.id}
+              {...getItemProps({ item })}
+              highlighted={index === highlightedIndex}
+            >
+              <img
+                src={item.photo.image.publicUrlTransformed}
+                alt={item.name}
+                width="50"
+              />
+              {item.name}
+            </DropDownItem>
+          ))}
+
+        {isOpen && !items.length && !loading && (
+          <DropDownItem>Sorry. No items found for {inputValue}</DropDownItem>
+        )}
       </DropDown>
     </SearchStyles>
   );
