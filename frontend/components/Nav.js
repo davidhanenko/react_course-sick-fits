@@ -12,18 +12,19 @@ export default function Nav() {
 
   return (
     <NavStyles>
-      <Link href='/products'>Products</Link>
+      <Link href="/products">Products</Link>
       {user && (
         <>
-          <Link href='/sell'>Sell</Link>
-          <Link href='/orders'>Orders</Link>
-          <Link href='/account'>Account</Link>
+          <Link href="/sell">Sell</Link>
+          <Link href="/orders">Orders</Link>
+          <Link href="/account">Account</Link>
           <SignOut />
-          <button type='button' onClick={openCart}>
+          <button type="button" onClick={openCart}>
             My Cart
             <CartCount
               count={user.cart.reduce(
-                (count, cartItem) => count + cartItem.quantity,
+                (count, cartItem) =>
+                  count + (cartItem.product ? cartItem.quantity : 0),
                 0
               )}
             />
@@ -32,7 +33,7 @@ export default function Nav() {
       )}
       {!user && (
         <>
-          <Link href='/signin'>Sign In</Link>
+          <Link href="/signin">Sign In</Link>
         </>
       )}
     </NavStyles>
