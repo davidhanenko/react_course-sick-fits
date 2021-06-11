@@ -1,3 +1,4 @@
+import { useMutation } from '@apollo/client';
 import {
   CardElement,
   Elements,
@@ -5,6 +6,7 @@ import {
   useStripe,
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import gql from 'graphql-tag';
 import nProgress from 'nprogress';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -19,6 +21,20 @@ const CheckoutFormStyles = styled.form`
   grid-gap: 1rem;
 `;
 
+const CREATE_ORDER_MUTATION = gql`
+  mutation CREATE_ORDER_MUTATION($token: String!) {
+    checkout(token: $token) {
+      id
+      charge
+      total
+      items {
+        id
+        name
+      }
+    }
+  }
+`;
+
 // Stripes
 const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
@@ -27,6 +43,9 @@ function CheckoutForm() {
   const [loading, setLoading] = useState();
   const stripe = useStripe();
   const elements = useElements();
+  const [checkout, { error: graphQlError }] = useMutation(
+    CREATE_ORDER_MUTATION
+  );
 
   async function handleSubmit(e) {
     // 1. Stop form from submiting & turn the loader on
@@ -42,12 +61,21 @@ function CheckoutForm() {
       type: 'card',
       card: elements.getElement(CardElement),
     });
-    console.log(paymentMethod);
+
     // 4. Handle any errors from Stripe
     if (error) {
       setError(error);
+      nProgress.done();
+      return; // Stop the checkout from happening
     }
     // 5. Send the token from step 3 to uur keystone server, via a custom mutation
+    const order = await checkout({
+      variables: {
+        token: paymentMethod.id,
+      },
+    });
+    console.log('Order:');
+    console.log(order);
     // 6. Change the page to view the order
     // 7. Close the cart
     // 8. Turn the loader off
@@ -58,6 +86,7 @@ function CheckoutForm() {
   return (
     <CheckoutFormStyles onSubmit={handleSubmit}>
       {error && <p style={{ fontSize: 12 }}>{error.message}</p>}
+      {graphQlError && <p style={{ fontSize: 12 }}>{graphQlError.message}</p>}
       <CardElement />
       <SickButton>Check Out Now</SickButton>
     </CheckoutFormStyles>
