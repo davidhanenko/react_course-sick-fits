@@ -54,11 +54,11 @@ export default function OrdersPage() {
       </Head>
       <h2>You have {allOrders.length} orders</h2>
       <OrderUl>
-        {allOrders.map((order) => (
-          <OrderItemStyles>
-            <Link href={`/order/${order.id}`} key={`order-${order.id}`}>
+        {allOrders.map(order => (
+          <OrderItemStyles key={`order-${order.id}`}>
+            <Link href={`/order/${order.id}`}>
               <a>
-                <div className="order-meta">
+                <div className='order-meta'>
                   <p>
                     {countItemsInAnOrder(order)}{' '}
                     {countItemsInAnOrder(order) === 1 ? (
@@ -73,8 +73,8 @@ export default function OrdersPage() {
                   </p>
                   <p>{formatMoney(order.total)}</p>
                 </div>
-                <div className="images">
-                  {order.items.map((item) => (
+                <div className='images'>
+                  {order.items.map(item => (
                     <img
                       key={`image-${item.id}`}
                       src={item.photo?.image?.publicUrlTransformed}
