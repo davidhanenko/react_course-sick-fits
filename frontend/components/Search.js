@@ -67,7 +67,7 @@ export default function Search() {
         pathname: `/product/${selectedItem.id}`,
       });
     },
-    itemToString: (item) => item?.name || '',
+    itemToString: item => item?.name || '',
   });
 
   return (
@@ -93,7 +93,7 @@ export default function Search() {
               <img
                 src={item.photo.image.publicUrlTransformed}
                 alt={item.name}
-                width="50"
+                width='50'
               />
               {item.name}
             </DropDownItem>

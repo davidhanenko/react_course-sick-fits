@@ -63,3 +63,5 @@ export default function SingleProduct({ id }) {
     </ProductStyles>
   );
 }
+
+export { SINGLE_ITEM_QUERY };

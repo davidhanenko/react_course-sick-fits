@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import { getOperationDefinition } from '@apollo/client/utilities';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import ErrorMessage from '../../components/ErrorMessage';

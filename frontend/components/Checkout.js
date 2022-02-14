@@ -82,8 +82,8 @@ function CheckoutForm() {
         token: paymentMethod.id,
       },
     });
-    console.log('Order:');
-    console.log(order);
+    // console.log('Order:');
+    // console.log(order);
     // 6. Change the page to view the order
     router.push({
       pathname: '/order/[id]',

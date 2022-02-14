@@ -25,7 +25,7 @@ const AnimationStyles = styled.span`
     transform: scale(4) rotateX(0.25turn);
   }
   .count-enter-active {
-    transform: rotateX(0))
+    transform: rotateX(0);
   }
   .count-exit {
     top: 0;

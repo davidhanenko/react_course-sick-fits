@@ -6,6 +6,7 @@ import Page from '../components/Page';
 import '../components/styles/nprogress.css';
 import withData from '../lib/withData';
 import { CartStateProvider } from '../lib/CartState';
+import { getOperationRootType } from 'graphql';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
