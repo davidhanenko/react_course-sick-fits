@@ -14,6 +14,7 @@ describe('<Product/>', () => {
         <Product product={product} />
       </MockedProvider>
     );
+    
     const priceTag = screen.getByText('$50');
     expect(priceTag).toBeInTheDocument();
 
